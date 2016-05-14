@@ -1,0 +1,103 @@
+extends layout
+
+block content
+  .jumbotron
+    .container
+      h1 Albums of the Day
+      table.table.table-striped(style='border-collapse:collapse;')
+        thead
+          tr
+            th No
+            th
+            th Artist
+            th Album
+            th Genre
+        tbody
+          each album, i in albumlist
+            tr.accordion-toggle(data-toggle='collapse', data-target='#demo#{i}')
+              td= album.Order
+              td
+                button.btn.btn-default.btn-xs
+                  span.glyphicon.glyphicon-eye-open
+              td= album.Artist
+              td= album.Title
+              td= album.Genre
+            tr
+              td.hiddenRow(colspan='12')
+                .accordian-body.collapse(id='demo#{i}')
+                  table.table.table-striped
+                    thead
+                      tr
+                        th(style='width:100px') Date
+                        th(style='width:150px') Recommended By
+                        th Top Tracks
+                    tbody
+                      tr
+                        td= album.DateRecommended
+                        td= album.RecommendedBy
+                        td= album.TopTracks
+
+//    .col-lg-6
+//      .panel.panel-default
+//        .panel-heading
+//          h1 Albums of the Day
+//        .panel-body
+//          table.table.table-condensed(style='border-collapse:collapse;')
+//            thead
+//              tr
+//                th  
+//                th No
+//                th Date
+//                th RecommendedBy
+//                th Artist
+//                th Album
+//            tbody
+//              each album, i in albumlist
+//                tr.accordion-toggle(data-toggle='collapse', data-target='#demo1')
+//                  td
+//                    button.btn.btn-default.btn-xs
+//                      span.glyphicon.glyphicon-eye-open
+//                  td= albumlist.length - i
+//                  td= album.DateRecommended
+//                  td= album.RecommendedBy
+//                  td= album.Artist
+//                  td= album.Album
+//                tr
+//                  td.hiddenRow(colspan='12')
+//                    #demo1.accordian-body.collapse
+//                      table.table.table-striped
+//                        thead
+//                          tr
+//                            th Name 1
+//                            th Name 2
+//                        tbody
+//                          tr
+//                            td Value 1
+//                            td Value 2
+
+
+//block content
+//  .jumbotron
+//    .container
+//      h1 Albums of the Day
+//      table.table.table-striped
+//        thead
+//          th No
+//          th Date   
+//          th RecommendedBy
+//          th Genre
+//          th Artist
+//          th Album
+//          //th(style='width:100px') RecommendedBy
+//          //th(style='width:50px')  Genre
+//          //th(style='width:400px') Artist
+//          //th(style='width:400px') Album
+//        tbody
+//          each album, i in albumlist
+//            tr
+//              td= album.Order
+//              td= album.DateRecommended
+//              td= album.RecommendedBy
+//              td= album.Genre
+//              td= album.Artist
+//              td= album.Title

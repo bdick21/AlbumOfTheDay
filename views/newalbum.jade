@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  .jumbotron
+    .container
+      h1= title
+
+      form#formAddAlbum(name="addalbum",method="post",action="/addalbum")
+        input#inputDateRecommended(type="date", placeholder="DateRecommended", name="DateRecommended")
+        input#inputRecommendedBy(type="text", placeholder="RecommendedBy", name="RecommendedBy")
+        input#inputArtist(type="text", placeholder="Artist", name="Artist")
+        input#inputAlbum(type="text", placeholder="Album", name="Album")
+        button#btnSubmit(type="submit") submit
