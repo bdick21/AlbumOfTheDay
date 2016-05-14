@@ -5,25 +5,18 @@ block content
     .container
       h1 Albums of the Day
       table.table.table-striped(style='border-collapse:collapse;')
-        thead
-          tr
-            th No
-            th
-            th
-            th Artist
-            th Album
-            th Genre
         tbody
           each album, i in albumlist
             tr.accordion-toggle(data-toggle='collapse', data-target='#demo#{i}')
-              td= album.Order
               td
-                button.btn.btn-default.btn-xs
-                  span.glyphicon.glyphicon-eye-open
+                img(src=album.cover_art, alt=album.Title, style='width:250px;height:250px;')
               td
-                img(src=album.cover_art, alt=album.Title, style='width:200px;height:200px;')
-              td= album.Artist
-              td= album.Title
+               h3= album.Title
+               p
+               h4= album.Artist
+               p
+               button.btn.btn-default.btn-xs
+                 span.glyphicon.glyphicon-eye-open
               td= album.Genre
             tr
               td.hiddenRow(colspan='12')
