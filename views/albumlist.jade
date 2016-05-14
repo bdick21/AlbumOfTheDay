@@ -39,12 +39,14 @@ block content
                         td= album.DateRecommended
                         td= album.RecommendedBy
                         td= album.TopTracks
-                    thead
-                      tr
-                        th Comment
-                    tbody
-                      tr
-                        td(colspan='3')= album.Amazon
+                    if (album.Amazon !== undefined)
+                      thead
+                        tr
+                          th Comments
+                      tbody
+                        each comment in album.Amazon
+                          tr
+                            td(colspan='3')= album.Amazon
                         
 //        <tr>
 //            <td colspan="12" class="hiddenRow">
