@@ -7,6 +7,9 @@ block content
       table.table.table-striped(style='border-collapse:collapse;')
         if albumlist
           each album, i in albumlist
+            /////////////////////////////////////////////////////////////
+            // Visible 
+            // ROW1 COL1=CoverArt, COL2=Title/Artist/Genre/Button
             tr.accordion-toggle(data-toggle='collapse', data-target='#demo#{i}')
               td
                 img(src=album.cover_art, alt=album.Title, style='width:175px;height:175px;')
@@ -19,10 +22,16 @@ block content
                p
                button.btn.btn-default.btn-xs
                  span.glyphicon.glyphicon-eye-open
+            /////////////////////////////////////////////////////////////
+            // Collapsing
+            // ROW1 COL1=Date COL2=RecommendedBy COL3=TopTracks
+            // ROW2 COL1=Comments
             tr
               td.hiddenRow(colspan='12')
                 .accordian-body.collapse(id='demo#{i}')
                   table.table.table-striped
+                    //////////////////////////////////////////////////////
+                    // ROW1 COL1=Date COL2=RecommendedBy COL3=TopTracks
                     thead
                       tr
                         th(style='width:150px') Date
@@ -39,6 +48,8 @@ block content
                           if album.TopTracks
                             each t in album.TopTracks
                               p= t[0]
+                    //////////////////////////////////////////////////////
+                    // ROW2 COL1=Comments
                     if album.Amazon
                       thead
                         tr
@@ -47,6 +58,8 @@ block content
                         each comment in album.Amazon
                           tr
                             td(colspan='3')= comment
+                    //////////////////////////////////////////////////////
+
 
 // th(style='width:100px') Date
 // th(style='width:150px') Recommended By
