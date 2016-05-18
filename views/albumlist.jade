@@ -3,7 +3,12 @@ extends layout
 block content
   .jumbotron
     .container
-      h1 Albums of the Day
+      h1 Albums of the Day 
+      style.
+        p {
+        color: blue;
+        font-size: 8px;
+        }
       table.table.table-striped(style='border-collapse:collapse;')
         if albumlist
           each album, i in albumlist
@@ -46,8 +51,8 @@ block content
                         td= album.RecommendedBy
                         td
                           if album.TopTracks
-                            each t in album.TopTracks
-                              p= t[0]
+                            each track in album.TopTracks
+                              iframe(src="https://embed.spotify.com/?uri=spotify:track:#{track[1]}" width="300" height="80" frameborder="0" allowtransparency="true")
                     //////////////////////////////////////////////////////
                     // ROW2 COL1=Comments
                     if album.Amazon
