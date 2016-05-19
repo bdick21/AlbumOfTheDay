@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  .jumbotron
+    .container
+      ////////////////////////////////////////////////////
+      h1 Vote for Track of the Day
+      ////////////////////////////////////////////////////
+      table.table.table-striped
+        ////////////////////////////////////////////////////
+        thead
+          th Track 1
+          th Track 2
+        ////////////////////////////////////////////////////
+        tbody
+          tr
+            td
+              p= album1._id
+              iframe(src="https://embed.spotify.com/?uri=spotify:track:#{album1.TopTracks[0][1]}" width="300" height="80" frameborder="0" allowtransparency="true")
+              a(href="/vote/#{album1._id}") Vote
+                                
+            td
+              p= album2._id
+              iframe(src="https://embed.spotify.com/?uri=spotify:track:#{album2.TopTracks[0][1]}" width="300" height="80" frameborder="0" allowtransparency="true")
+              a(href="/vote/#{album2._id}") Vote
+        ////////////////////////////////////////////////////
+
+    h4 Skip this one
+    a(href="/battle") skip
+ 

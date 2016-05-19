@@ -3,6 +3,7 @@ var router = express.Router();
 
 ///////////////////////////////////////////////////////////////////////////
 // GET page - Home
+
 router.get('/', function(req, res, next)
 {
   res.render('index', { title: 'Album of the Day' });
@@ -10,6 +11,7 @@ router.get('/', function(req, res, next)
 
 ///////////////////////////////////////////////////////////////////////////
 // GET page - Albumlist
+
 router.get('/albumlist', function(req, res, next)
 {
   var db = req.db;
@@ -25,13 +27,80 @@ router.get('/albumlist', function(req, res, next)
 
 ///////////////////////////////////////////////////////////////////////////
 // GET page - New Album
+
 router.get('/newalbum', function(req, res, next)
 {
   res.render('newalbum', { title: 'Add New Album' });
 });
 
 ///////////////////////////////////////////////////////////////////////////
-/* POST to Add Album Service */
+// GET page - Battle
+
+router.get('/battle', function(req, res, next)
+{
+  var db = req.db;
+  var sCollection = process.env.AOTD_DB_COLLECTION;
+  var collection = db.get(sCollection);
+
+  collection.find({},{},
+                  function(e,docs)
+                  {
+                    console.log("Getting first")
+                    a1 = get_random_album_with_spotify_tracks( docs );
+                    console.log("Getting second")
+                    a2 = get_random_album_with_spotify_tracks( docs );
+                    res.render('battle', { title: 'Battle of the day', album1:a1, album2:a2 });
+                  });
+});
+
+function get_random_album_with_spotify_tracks( docs )
+{
+  while (true)
+  {
+    randpos = Math.floor(Math.random() * Object.keys(docs).length);
+ 
+    a = docs[randpos];
+
+    if ( !("TopTracks" in a) )
+      continue;
+
+    if ( a["TopTracks"][0][1] )
+      break;
+  }
+ 
+  return a; 
+}
+
+///////////////////////////////////////////////////////////////////////////
+// GET page - Vote
+
+router.get('/vote/:id', function(req, res, next)
+{
+  var db = req.db;
+  var sCollection = process.env.AOTD_DB_COLLECTION;
+  var collection = db.get(sCollection);
+  
+  var id = req.params.id;
+  
+  console.log( db );
+  console.log( id );
+  
+  collection.find({ "_id": id },{},
+                  function(e,doc)
+                  {
+                    console.log(e)
+                    console.log( "doc" + doc )
+                    // doc.update_one({  "$inc": { "Score": 1 } });
+                    collection.update({ "_id":id }, {  "$inc": { "Score": 1 } });
+                  });
+                  // collection.find({  "id": id }).update_one({  "$inc": { "Score": 1 } });
+  
+  res.redirect("/battle");
+});
+
+///////////////////////////////////////////////////////////////////////////
+// POST to Add Album Service
+
 router.post('/addalbum', function(req, res)
 {
     var db = req.db;

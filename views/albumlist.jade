@@ -3,7 +3,11 @@ extends layout
 block content
   .jumbotron
     .container
+      /////////////////////////////////////////////////////////////
+      // Header
       h1 Albums of the Day
+      /////////////////////////////////////////////////////////////
+      // Table
       table.table.table-striped(style='border-collapse:collapse;')
         if albumlist
           each album, i in albumlist
