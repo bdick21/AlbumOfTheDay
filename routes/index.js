@@ -1,13 +1,15 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+///////////////////////////////////////////////////////////////////////////
+// GET page - Home
 router.get('/', function(req, res, next)
 {
   res.render('index', { title: 'Album of the Day' });
 });
 
-/* GET Albumlist page */
+///////////////////////////////////////////////////////////////////////////
+// GET page - Albumlist
 router.get('/albumlist', function(req, res, next)
 {
   var db = req.db;
@@ -21,12 +23,14 @@ router.get('/albumlist', function(req, res, next)
                   });
 });
 
-/* GET New Album page */
+///////////////////////////////////////////////////////////////////////////
+// GET page - New Album
 router.get('/newalbum', function(req, res, next)
 {
   res.render('newalbum', { title: 'Add New Album' });
 });
 
+///////////////////////////////////////////////////////////////////////////
 /* POST to Add Album Service */
 router.post('/addalbum', function(req, res)
 {
@@ -60,5 +64,7 @@ router.post('/addalbum', function(req, res)
           }
       });
 });
+
+///////////////////////////////////////////////////////////////////////////
 
 module.exports = router;
