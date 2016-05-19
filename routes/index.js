@@ -17,12 +17,13 @@ router.get('/albumlist', function(req, res, next)
   var db = req.db;
   var sCollection = process.env.AOTD_DB_COLLECTION;
   var collection  = db.get(sCollection);
-
-  collection.find({},{},
-                  function(e,docs)
-                  {
-                    res.render('albumlist', {"albumlist":docs});
-                  });
+  
+  collection.find( {$query: {}, $orderby: { "Score" : -1 }}, // Order by 'Score'
+                   {},
+                   function(e,docs)
+                   {
+                     res.render('albumlist', {"albumlist":docs});
+                   });
 });
 
 ///////////////////////////////////////////////////////////////////////////

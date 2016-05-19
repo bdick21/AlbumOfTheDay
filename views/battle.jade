@@ -15,12 +15,12 @@ block content
         tbody
           tr
             td
-              p= album1._id
+              p= album1.Title
               iframe(src="https://embed.spotify.com/?uri=spotify:track:#{album1.TopTracks[0][1]}" width="300" height="80" frameborder="0" allowtransparency="true")
               a(href="/vote/#{album1._id}") Vote
                                 
             td
-              p= album2._id
+              p= album2.Title
               iframe(src="https://embed.spotify.com/?uri=spotify:track:#{album2.TopTracks[0][1]}" width="300" height="80" frameborder="0" allowtransparency="true")
               a(href="/vote/#{album2._id}") Vote
         ////////////////////////////////////////////////////
